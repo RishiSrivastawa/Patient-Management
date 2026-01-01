@@ -1,7 +1,10 @@
 package xyz.rishi.patientservice.mapper;
 
+import xyz.rishi.patientservice.dto.PatientRequestDTO;
 import xyz.rishi.patientservice.dto.PatientResponseDTO;
 import xyz.rishi.patientservice.model.Patient;
+
+import java.time.LocalDate;
 
 public class PatientMapper {
     public static PatientResponseDTO toDTO(Patient patient) {
@@ -12,6 +15,15 @@ public class PatientMapper {
         patientDTO.setEmail(patient.getEmail());
         patientDTO.setDateOfBirth(patient.getDateOfBirth().toString());
         return patientDTO;
+    }
 
+    public static Patient toModel(PatientRequestDTO patientRequestDTO) {
+        Patient patient = new Patient();
+        patient.setName(patientRequestDTO.getName());
+        patient.setAddress(patientRequestDTO.getAddress());
+        patient.setEmail(patientRequestDTO.getEmail());
+        patient.setDateOfBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth()));
+        patient.setRegisteredDate(LocalDate.parse(patientRequestDTO.getRegisteredDate()));
+        return patient;
     }
 }
